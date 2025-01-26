@@ -49,10 +49,10 @@
 
             display-name = "Base";
             bindings = <
-&kp ESCAPE     &kp Q                &kp W            &kp E            &kp R  &kp T             &kp Y      &kp U      &kp I                 &kp O             &kp P                         &kp BSPC
-&kp DEL        &HML LEFT_CONTROL A  &HML LEFT_ALT S  &HML LEFT_WIN D  &kp F  &kp G             &kp H      &kp J      &HMR LEFT_GUI K       &HMR RIGHT_ALT L  &HMR RIGHT_CONTROL SEMICOLON  &kp RETURN
-&kp BACKSLASH  &kp Z                &kp X            &kp C            &kp V  &kp B             &kp N      &kp M      &kp COMMA             &kp DOT           &kp FSLH                      &kp APOSTROPHE
-                                                     &HML PLUS EQUAL  &mo 1  &kp LEFT_SHIFT    &kp SPACE  &lt 2 TAB  &HMR LS(MINUS) MINUS
+&kp ESCAPE     &kp Q        &kp W            &kp E            &kp R                &kp T             &kp Y      &kp U                 &kp I                 &kp O             &kp P                &kp BSPC
+&kp DEL        &HML LWIN A  &HML LEFT_ALT S  &HML LSHIFT D    &HML LEFT_CONTROL F  &kp G             &kp H      &HML RIGHT_CONTROL J  &HMR RSHFT K          &HMR RIGHT_ALT L  &HMR RWIN SEMICOLON  &kp RETURN
+&kp BACKSLASH  &kp Z        &kp X            &kp C            &kp V                &kp B             &kp N      &kp M                 &kp COMMA             &kp DOT           &kp FSLH             &kp APOSTROPHE
+                                             &HML PLUS EQUAL  &mo 2                &kp LEFT_SHIFT    &kp SPACE  &lt 1 TAB             &HMR LS(MINUS) MINUS
             >;
         };
 
@@ -65,10 +65,10 @@
 
             display-name = "Lower";
             bindings = <
-&kp KP_MULTIPLY       &kp MINUS      &mt AMPERSAND N7          &mt ASTERISK N8       &mt LEFT_PARENTHESIS N9  &kp PLUS          &kp LS(LEFT_BRACKET)      &kp LS(RIGHT_BRACKET)  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp LEFT_BRACKET  &kp RIGHT_BRACKET
-&kp SLASH             &kp BACKSPACE  &mt DOLLAR NUMBER_4       &mt PERCENT N5        &mt CARET NUMBER_6       &kp ENTER         &kp LS(LC(LG(LEFT_ALT)))  &kp LEFT               &kp DOWN              &kp UP_ARROW           &kp RIGHT_ARROW   &kp DOLLAR
-&kp NON_US_BACKSLASH  &kp N0         &mt EXCLAMATION NUMBER_1  &mt AT_SIGN NUMBER_2  &mt HASH NUMBER_3        &kp PERIOD        &kp LA(LS(MINUS))         &kp LS(LC(TAB))        &kp PAGE_DOWN         &kp PG_UP              &kp LC(TAB)       &kp TILDE
-                                                               &kp TILDE             &kp SPACE                &kp LEFT_SHIFT    &kp SPACE                 &kp LG(LS(LEFT))       &kp LS(LG(RIGHT))
+&kp KP_MULTIPLY       &kp F1                  &kp F2                    &kp F3                &kp F4                     &kp F5            &kp F6             &kp F7                &kp F8              &kp F9            &kp F10            &kp F11
+&kp SLASH             &mt LEFT_META NUMBER_1  &mt LEFT_ALT NUMBER_2     &mt LSHIFT NUMBER_3   &mt LEFT_CONTROL NUMBER_4  &kp N5            &kp NUMBER_6       &mt RIGHT_CONTROL N7  &mt RIGHT_SHIFT N8  &mt RIGHT_ALT N9  &mt RIGHT_META N0  &kp PLUS
+&kp NON_US_BACKSLASH  &kp N0                  &mt EXCLAMATION NUMBER_1  &mt AT_SIGN NUMBER_2  &mt HASH NUMBER_3          &kp PERIOD        &kp LA(LS(MINUS))  &kp LS(LC(TAB))       &kp PAGE_DOWN       &kp PG_UP         &kp LC(TAB)        &kp TILDE
+                                                                        &kp TILDE             &kp SPACE                  &kp LEFT_SHIFT    &kp SPACE          &kp LG(LS(LEFT))      &kp LS(LG(RIGHT))
             >;
         };
 
@@ -81,10 +81,10 @@
 
             display-name = "Raise";
             bindings = <
-&kp ESC  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5    &kp F6            &kp F7        &kp F8             &kp F9            &kp F10       &kp F11
-&trans   &trans  &trans  &trans  &trans  &trans    &trans            &kp C_PREV    &kp K_VOLUME_DOWN  &kp LS(K_VOL_UP)  &kp C_NEXT    &kp GRAVE
-&trans   &trans  &trans  &trans  &trans  &trans    &bt BT_SEL 0      &bt BT_SEL 1  &bt BT_SEL 2       &bt BT_SEL 3      &bt BT_SEL 4  &bt BT_CLR
-                         &trans  &trans  &trans    &kp C_PLAY_PAUSE  &trans        &kp C_MUTE
+&kp ESC  &kp F1         &kp F2        &kp F3      &kp F4            &kp F5            &kp F6         &kp HOME      &kp UP_ARROW  &kp END       &kp F10       &kp BACKSPACE
+&trans   &kp LEFT_META  &kp LEFT_ALT  &kp LSHIFT  &kp LEFT_CONTROL  &trans            &kp PAGE_UP    &kp LEFT      &kp DOWN      &kp RIGHT     &kp C_NEXT    &kp ENTER
+&trans   &trans         &trans        &trans      &trans            &trans            &kp PAGE_DOWN  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_CLR
+                                      &trans      &trans            &kp LEFT_SHIFT    &kp SPACE      &trans        &kp C_MUTE
             >;
         };
 
