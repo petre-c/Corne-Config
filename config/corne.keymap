@@ -49,10 +49,10 @@
 
             display-name = "Base";
             bindings = <
-&kp ESCAPE     &kp Q        &kp W            &kp E            &kp R                &kp T        &kp Y           &kp U                 &kp I                 &kp O             &kp P                &kp BSPC
-&kp DEL        &HML LWIN A  &HML LEFT_ALT S  &HML LSHIFT D    &HML LEFT_CONTROL F  &kp G        &kp H           &HML RIGHT_CONTROL J  &HMR RSHFT K          &HMR RIGHT_ALT L  &HMR RWIN SEMICOLON  &kp RETURN
-&kp BACKSLASH  &kp Z        &kp X            &kp C            &kp V                &kp B        &kp N           &kp M                 &kp COMMA             &kp DOT           &kp FSLH             &kp APOSTROPHE
-                                             &HML PLUS EQUAL  &mo 2                &kp SPACE    &kp LEFT_SHIFT  &lt 1 TAB             &HMR LS(MINUS) MINUS
+&kp ESCAPE     &kp Q        &kp W            &kp E            &kp R                &kp T        &kp Y                  &kp U                 &kp I                 &kp O             &kp P                &kp BSPC
+&kp DEL        &HMR LWIN A  &HMR LEFT_ALT S  &HMR LSHIFT D    &HMR LEFT_CONTROL F  &kp G        &kp H                  &HMR RIGHT_CONTROL J  &HMR RSHFT K          &HMR RIGHT_ALT L  &HMR RWIN SEMICOLON  &kp RETURN
+&kp BACKSLASH  &kp Z        &kp X            &kp C            &kp V                &kp B        &kp N                  &kp M                 &kp COMMA             &kp DOT           &kp FSLH             &kp APOSTROPHE
+                                             &HML PLUS EQUAL  &mo 2                &kp SPACE    &HMR LEFT_SHIFT SPACE  &lt 1 TAB             &HMR LS(MINUS) MINUS
             >;
         };
 
@@ -65,10 +65,10 @@
 
             display-name = "Lower";
             bindings = <
-&kp KP_MULTIPLY       &kp F1                  &kp F2                    &kp F3                &kp F4                     &kp F5            &kp F6             &kp F7                &kp F8              &kp F9            &kp F10            &kp F11
-&kp SLASH             &mt LEFT_META NUMBER_1  &mt LEFT_ALT NUMBER_2     &mt LSHIFT NUMBER_3   &mt LEFT_CONTROL NUMBER_4  &kp N5            &kp NUMBER_6       &mt RIGHT_CONTROL N7  &mt RIGHT_SHIFT N8  &mt RIGHT_ALT N9  &mt RIGHT_META N0  &kp PLUS
-&kp NON_US_BACKSLASH  &kp N0                  &mt EXCLAMATION NUMBER_1  &mt AT_SIGN NUMBER_2  &mt HASH NUMBER_3          &kp PERIOD        &kp LA(LS(MINUS))  &kp LS(LC(TAB))       &kp PAGE_DOWN       &kp PG_UP         &kp LC(TAB)        &kp TILDE
-                                                                        &kp TILDE             &kp SPACE                  &kp LEFT_SHIFT    &kp SPACE          &kp LG(LS(LEFT))      &kp LS(LG(RIGHT))
+&kp KP_MULTIPLY       &kp F1                   &kp F2                    &kp F3                &kp F4                      &kp F5            &kp F6             &kp F7                 &kp F8               &kp F9             &kp F10             &kp F11
+&kp SLASH             &HMR LEFT_META NUMBER_1  &HMR LEFT_ALT NUMBER_2    &HMR LSHIFT NUMBER_3  &HMR LEFT_CONTROL NUMBER_4  &kp N5            &kp NUMBER_6       &HMR RIGHT_CONTROL N7  &HMR RIGHT_SHIFT N8  &HMR RIGHT_ALT N9  &HMR RIGHT_META N0  &kp PLUS
+&kp NON_US_BACKSLASH  &kp N0                   &mt EXCLAMATION NUMBER_1  &mt AT_SIGN NUMBER_2  &mt HASH NUMBER_3           &kp PERIOD        &kp LA(LS(MINUS))  &kp LS(LC(TAB))        &kp PAGE_DOWN        &kp PG_UP          &kp LC(TAB)         &kp TILDE
+                                                                         &kp TILDE             &kp SPACE                   &kp LEFT_SHIFT    &kp SPACE          &kp LG(LS(LEFT))       &kp LS(LG(RIGHT))
             >;
         };
 
