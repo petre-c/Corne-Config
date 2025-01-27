@@ -65,10 +65,10 @@
 
             display-name = "Lower";
             bindings = <
-&kp KP_MULTIPLY       &kp F1                   &kp F2                    &kp F3                &kp F4                      &kp F5        &kp F6             &kp F7                 &kp F8               &kp F9             &kp F10             &kp F11
-&kp SLASH             &HMR LEFT_META NUMBER_1  &HMR LEFT_ALT NUMBER_2    &HMR LSHIFT NUMBER_3  &HMR LEFT_CONTROL NUMBER_4  &kp N5        &kp NUMBER_6       &HMR RIGHT_CONTROL N7  &HMR RIGHT_SHIFT N8  &HMR RIGHT_ALT N9  &HMR RIGHT_META N0  &kp F12
-&kp NON_US_BACKSLASH  &kp N0                   &mt EXCLAMATION NUMBER_1  &mt AT_SIGN NUMBER_2  &mt HASH NUMBER_3           &kp PERIOD    &kp LA(LS(MINUS))  &kp LS(LC(TAB))        &kp PAGE_DOWN        &kp PG_UP          &kp LC(TAB)         &kp TILDE
-                                                                         &kp TILDE             &kp SPACE                   &kp SPACE     &kp LEFT_SHIFT     &kp LG(LS(LEFT))       &kp LS(LG(RIGHT))
+&kp KP_MULTIPLY       &kp F1                   &kp F2                  &kp F3                &kp F4                      &kp F5        &kp F6             &kp F7                 &kp F8               &kp F9             &kp F10             &kp F11
+&kp SLASH             &HMR LEFT_META NUMBER_1  &HMR LEFT_ALT NUMBER_2  &HMR LSHIFT NUMBER_3  &HMR LEFT_CONTROL NUMBER_4  &kp N5        &kp NUMBER_6       &HMR RIGHT_CONTROL N7  &HMR RIGHT_SHIFT N8  &HMR RIGHT_ALT N9  &HMR RIGHT_META N0  &kp F12
+&kp NON_US_BACKSLASH  &kp N0                   &kp LEFT_BRACKET        &kp RIGHT_BRACKET     &mt HASH NUMBER_3           &kp PERIOD    &kp LA(LS(MINUS))  &kp LS(LC(TAB))        &kp PAGE_DOWN        &kp PG_UP          &kp LC(TAB)         &kp TILDE
+                                                                       &kp TILDE             &kp SPACE                   &kp SPACE     &kp LEFT_SHIFT     &kp LG(LS(LEFT))       &kp LS(LG(RIGHT))
             >;
         };
 
