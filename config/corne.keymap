@@ -70,7 +70,7 @@
 &kp KP_MULTIPLY       &kp F1                   &kp F2                  &kp F3                &kp F4                      &kp F5        &kp F6             &kp F7                 &kp F8               &kp F9             &kp F10             &kp F11
 &kp SLASH             &HML LEFT_META NUMBER_1  &HML LEFT_ALT NUMBER_2  &HML LSHIFT NUMBER_3  &HML LEFT_CONTROL NUMBER_4  &kp N5        &kp NUMBER_6       &HMR RIGHT_CONTROL N7  &HMR RIGHT_SHIFT N8  &HMR RIGHT_ALT N9  &HMR RIGHT_META N0  &kp F12
 &kp NON_US_BACKSLASH  &kp N0                   &kp LEFT_BRACKET        &kp RIGHT_BRACKET     &mt HASH NUMBER_3           &kp PERIOD    &kp LA(LS(MINUS))  &kp LS(LC(TAB))        &kp COMMA            &kp DOT            &kp LC(TAB)         &kp TILDE
-                                                                       &kp TILDE             &kp SPACE                   &kp SPACE     &kp LEFT_SHIFT     &kp LG(LS(LEFT))       &kp LS(LG(RIGHT))
+                                                                       &kp LANGUAGE_2        &kp LS(LEFT_ALT)            &kp SPACE     &kp LEFT_SHIFT     &kp LG(LS(LEFT))       &kp LANG1
             >;
         };
 
@@ -83,10 +83,10 @@
 
             display-name = "Raise";
             bindings = <
-&kp ESC  &kp F1         &kp F2        &kp F3      &kp F4            &kp F5            &kp F6         &kp HOME        &kp UP_ARROW  &kp END       &kp F10       &kp BACKSPACE
-&trans   &kp LEFT_META  &kp LEFT_ALT  &kp LSHIFT  &kp LEFT_CONTROL  &trans            &kp PAGE_UP    &kp LEFT        &kp DOWN      &kp RIGHT     &kp C_NEXT    &kp ENTER
-&trans   &trans         &trans        &trans      &trans            &trans            &kp PAGE_DOWN  &bt BT_SEL 1    &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_CLR
-                                      &trans      &trans            &kp LEFT_SHIFT    &kp SPACE      &bt BT_CLR_ALL  &bt BT_SEL 0
+&kp ESC         &kp F1         &kp F2        &kp F3      &kp F4            &kp F5            &kp F6         &kp HOME      &kp UP_ARROW  &kp END       &kp F10       &kp BACKSPACE
+&trans          &kp LEFT_META  &kp LEFT_ALT  &kp LSHIFT  &kp LEFT_CONTROL  &trans            &kp PAGE_UP    &kp LEFT      &kp DOWN      &kp RIGHT     &kp C_NEXT    &kp ENTER
+&bt BT_CLR_ALL  &trans         &trans        &trans      &trans            &trans            &kp PAGE_DOWN  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_CLR
+                                             &trans      &trans            &kp LEFT_SHIFT    &kp SPACE      &trans        &bt BT_SEL 0
             >;
         };
 
