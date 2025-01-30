@@ -90,10 +90,10 @@
 
             display-name = "Raise";
             bindings = <
-&kp ESC         &kp F1         &kp F2        &kp F3      &kp F4            &kp F5            &kp F6         &kp HOME      &kp UP_ARROW  &kp END       &kp F10       &kp BACKSPACE
-&trans          &kp LEFT_META  &kp LEFT_ALT  &kp LSHIFT  &kp LEFT_CONTROL  &trans            &kp PAGE_UP    &kp LEFT      &kp DOWN      &kp RIGHT     &kp C_NEXT    &kp ENTER
-&bt BT_CLR_ALL  &trans         &trans        &trans      &trans            &trans            &kp PAGE_DOWN  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_CLR
-                                             &trans      &trans            &kp LEFT_SHIFT    &kp SPACE      &trans        &bt BT_SEL 0
+&kp ESC         &kp F1         &kp F2        &kp F3      &kp F4            &kp F5            &kp F6         &kp HOME  &kp UP_ARROW  &kp END    &kp F10     &kp BACKSPACE
+&trans          &kp LEFT_META  &kp LEFT_ALT  &kp LSHIFT  &kp LEFT_CONTROL  &trans            &kp PAGE_UP    &kp LEFT  &kp DOWN      &kp RIGHT  &kp C_NEXT  &kp ENTER
+&bt BT_CLR_ALL  &trans         &trans        &trans      &trans            &trans            &kp PAGE_DOWN  &trans    &trans        &trans     &trans      &trans
+                                             &trans      &trans            &kp LEFT_SHIFT    &kp SPACE      &trans    &trans
             >;
         };
 
