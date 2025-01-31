@@ -68,6 +68,16 @@
             bindings = <&kp LC(GRAVE)>;
             key-positions = <38 24>;
         };
+
+        CtrlT-lh {
+            bindings = <&kp LC(T)>;
+            key-positions = <38 16>;
+        };
+
+        CtrlN-lh {
+            bindings = <&kp LC(N)>;
+            key-positions = <38 16 37>;
+        };
     };
 
     keymap {
