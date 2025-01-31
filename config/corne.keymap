@@ -51,7 +51,7 @@
 
         Enter {
             bindings = <&kp ENTER>;
-            key-positions = <39 40>;
+            key-positions = <37 38>;
         };
 
         Bluetooth {
