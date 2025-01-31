@@ -58,6 +58,11 @@
             bindings = <&mo 4>;
             key-positions = <36 37 38>;
         };
+
+        Paste {
+            bindings = <&kp LC(V)>;
+            key-positions = <28 16>;
+        };
     };
 
     keymap {
