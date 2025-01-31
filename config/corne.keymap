@@ -63,6 +63,11 @@
             bindings = <&kp LC(V)>;
             key-positions = <28 16>;
         };
+
+        AltTab {
+            bindings = <&kp LA(TAB)>;
+            key-positions = <38 12>;
+        };
     };
 
     keymap {
