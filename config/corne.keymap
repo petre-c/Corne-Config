@@ -110,7 +110,7 @@
             display-name = "Raise";
             bindings = <
 &kp ESC         &kp F1         &kp F2            &kp F3             &kp F4            &kp F5                  &kp F6         &kp HOME    &kp UP_ARROW      &kp END            &kp BACKSPACE  &kp BACKSPACE
-&trans          &kp LEFT_META  &kp LEFT_ALT      &kp LSHIFT         &kp LEFT_CONTROL  &trans                  &kp PAGE_UP    &kp LEFT    &kp DOWN          &kp RIGHT          &kp C_NEXT     &kp ENTER
+&trans          &kp LEFT_META  &kp LEFT_ALT      &kp LSHIFT         &kp LEFT_CONTROL  &trans                  &kp PAGE_UP    &kp LEFT    &kp DOWN          &kp RIGHT          &kp MINUS      &kp EQUAL
 &bt BT_CLR_ALL  &trans         &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans            &trans                  &kp PAGE_DOWN  &kp DELETE  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH  &trans
                                                  &trans             &trans            &mt LEFT_SHIFT SPACE    &kp SPACE      &trans      &trans
             >;
