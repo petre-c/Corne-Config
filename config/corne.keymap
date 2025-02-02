@@ -17,7 +17,7 @@
 
             #binding-cells = <2>;
             tapping-term-ms = <250>;
-            quick-tap-ms = <100>;
+            quick-tap-ms = <80>;
             flavor = "balanced";
             hold-trigger-key-positions = <0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38 39 40 41>;
             require-prior-idle-ms = <40>;
@@ -31,7 +31,7 @@
 
             #binding-cells = <2>;
             tapping-term-ms = <280>;
-            quick-tap-ms = <125>;
+            quick-tap-ms = <100>;
             flavor = "balanced";
             hold-trigger-key-positions = <36 37 38 6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 39 40 41>;
             require-prior-idle-ms = <60>;
@@ -151,6 +151,15 @@
 &trans          &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
 &bt BT_CLR_ALL  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
                                 &trans  &trans  &trans    &trans  &trans  &trans
+            >;
+        };
+
+        Left {
+            bindings = <
+&kp LC(GRAVE)  &trans                &trans          &trans  &trans                &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans         &kp LA(LS(NUMBER_1))  &kp LS(LA(N0))  &trans  &trans                &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans         &trans                &trans          &trans  &kp LS(LA(NUMBER_1))  &kp LA(LS(N0))    &trans  &trans  &trans  &trans  &trans  &trans
+                                                     &trans  &trans                &trans            &trans  &trans  &trans
             >;
         };
     };
