@@ -156,10 +156,10 @@
 
         Left {
             bindings = <
-&kp LC(GRAVE)  &trans                &trans          &trans  &trans                &trans            &trans  &trans  &trans  &trans  &trans  &trans
-&trans         &kp LA(LS(NUMBER_1))  &kp LS(LA(N0))  &trans  &trans                &trans            &trans  &trans  &trans  &trans  &trans  &trans
-&trans         &trans                &trans          &trans  &kp LS(LA(NUMBER_1))  &kp LA(LS(N0))    &trans  &trans  &trans  &trans  &trans  &trans
-                                                     &trans  &trans                &trans            &trans  &trans  &trans
+&kp LC(GRAVE)  &trans                &trans          &trans  &trans                &kp C_VOLUME_UP    &trans  &trans  &trans  &trans  &trans  &trans
+&trans         &kp LA(LS(NUMBER_1))  &kp LS(LA(N0))  &trans  &trans                &kp C_VOL_DN       &trans  &trans  &trans  &trans  &trans  &trans
+&trans         &trans                &trans          &trans  &kp LS(LA(NUMBER_1))  &kp LA(LS(N0))     &trans  &trans  &trans  &trans  &trans  &trans
+                                                     &trans  &trans                &trans             &trans  &trans  &trans
             >;
         };
     };
