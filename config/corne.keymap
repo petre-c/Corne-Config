@@ -78,6 +78,11 @@
             bindings = <&kp LC(N)>;
             key-positions = <38 16 37>;
         };
+
+        LangChange {
+            bindings = <&kp LA(LSHIFT)>;
+            key-positions = <36 37>;
+        };
     };
 
     keymap {
