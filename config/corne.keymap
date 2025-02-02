@@ -113,9 +113,9 @@
 
             display-name = "Lower";
             bindings = <
-&kp DELETE            &kp F1                   &kp F2                  &kp F3                &kp F4                      &kp F5        &kp F6             &kp F7                 &kp F8               &kp F9             &kp F10             &kp F11
-&kp LS(LA(N0))        &HML LEFT_META NUMBER_1  &HML LEFT_ALT NUMBER_2  &HML LSHIFT NUMBER_3  &HML LEFT_CONTROL NUMBER_4  &kp N5        &kp NUMBER_6       &HMR RIGHT_CONTROL N7  &HMR RIGHT_SHIFT N8  &HMR RIGHT_ALT N9  &HMR RIGHT_META N0  &kp F12
-&kp LS(LA(NUMBER_1))  &kp N0                   &kp LEFT_BRACKET        &kp RIGHT_BRACKET     &mt HASH NUMBER_3           &kp PERIOD    &kp LA(LS(MINUS))  &kp LS(LC(TAB))        &kp COMMA            &kp DOT            &kp LC(TAB)         &kp GRAVE
+&kp DELETE            &kp F1                   &kp F2                  &kp F3                &kp F4                      &kp F5        &kp F6             &kp F7                 &kp F8               &kp F9             &kp F10      &kp BACKSPACE
+&kp LS(LA(N0))        &HML LEFT_META NUMBER_1  &HML LEFT_ALT NUMBER_2  &HML LSHIFT NUMBER_3  &HML LEFT_CONTROL NUMBER_4  &kp N5        &kp NUMBER_6       &HMR RIGHT_CONTROL N7  &HMR RIGHT_SHIFT N8  &HMR RIGHT_ALT N9  &kp F11      &kp F12
+&kp LS(LA(NUMBER_1))  &kp N0                   &kp LEFT_BRACKET        &kp RIGHT_BRACKET     &mt HASH NUMBER_3           &kp PERIOD    &kp LA(LS(MINUS))  &kp LS(LC(TAB))        &kp COMMA            &kp DOT            &kp LC(TAB)  &kp GRAVE
                                                                        &kp LANGUAGE_2        &kp LS(LEFT_ALT)            &kp SPACE     &TD0               &kp LG(LS(LEFT))       &kp LANG1
             >;
         };
