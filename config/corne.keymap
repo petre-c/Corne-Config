@@ -16,11 +16,11 @@
             bindings = <&kp>, <&kp>;
 
             #binding-cells = <2>;
-            tapping-term-ms = <250>;
+            tapping-term-ms = <200>;
             quick-tap-ms = <80>;
             flavor = "balanced";
             hold-trigger-key-positions = <0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38 39 40 41>;
-            require-prior-idle-ms = <40>;
+            require-prior-idle-ms = <30>;
             hold-trigger-on-release;
         };
 
@@ -43,6 +43,20 @@
             label = "TD0";
             #binding-cells = <0>;
             bindings = <&kp LSHIFT>, <&kp ENTER>;
+        };
+
+        HML_slow: HML_slow {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HML_SLOW";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <120>;
+            flavor = "balanced";
+            hold-trigger-key-positions = <36 37 38 6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 39 40 41>;
+            require-prior-idle-ms = <80>;
+            hold-trigger-on-release;
         };
     };
 
@@ -90,7 +104,7 @@
 &kp ESCAPE      &kp Q        &kp W            &kp E             &kp R                &kp T          &kp Y        &kp U                 &kp I               &kp O    &kp P                &kp BSPC
 &kp TAB         &HML LWIN A  &HML LEFT_ALT S  &HML LSHIFT D     &HML LEFT_CONTROL F  &kp G          &kp H        &HMR RIGHT_CONTROL J  &HMR RSHFT K        &kp L    &HMR RWIN SEMICOLON  &kp APOSTROPHE
 &kp LA(LSHIFT)  &kp Z        &kp X            &kp C             &kp V                &kp B          &kp N        &kp M                 &kp COMMA           &kp DOT  &kp FSLH             &kp DELETE
-                                              &kp LEFT_CONTROL  &mo 5                &lt 1 SPACE    &lt 2 SPACE  &lt 1 ENTER           &kp LA(LEFT_SHIFT)
+                                              &kp LEFT_CONTROL  &mo 0                &lt 1 SPACE    &lt 2 SPACE  &lt 1 ENTER           &kp LA(LEFT_SHIFT)
             >;
         };
 
@@ -128,10 +142,10 @@
 
         layer_3 {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans      &trans  &trans  &trans  &kp DELETE
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans      &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &kp DELETE  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans      &trans
+&trans  &trans  &trans  &trans  &trans                   &kp C_VOLUME_UP            &trans  &trans      &trans  &trans  &trans  &kp DELETE
+&trans  &trans  &trans  &trans  &trans                   &kp C_VOL_DN               &trans  &trans      &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &kp LS(LA(KP_NUMBER_1))  &kp LS(LA(KP_NUMBER_0))    &trans  &kp DELETE  &trans  &trans  &trans  &trans
+                        &trans  &trans                   &trans                     &trans  &trans      &trans
             >;
         };
 
@@ -141,15 +155,6 @@
 &trans          &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
 &bt BT_CLR_ALL  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
                                 &trans  &trans  &trans    &trans  &trans  &trans
-            >;
-        };
-
-        Left {
-            bindings = <
-&kp LC(GRAVE)  &trans                &trans          &trans  &trans                &kp C_VOLUME_UP    &trans  &trans  &trans  &trans  &trans  &trans
-&trans         &kp LA(LS(NUMBER_1))  &kp LS(LA(N0))  &trans  &trans                &kp C_VOL_DN       &trans  &trans  &trans  &trans  &trans  &trans
-&trans         &trans                &trans          &trans  &kp LS(LA(NUMBER_1))  &kp LA(LS(N0))     &trans  &trans  &trans  &trans  &trans  &trans
-                                                     &trans  &trans                &trans             &trans  &trans  &trans
             >;
         };
     };
