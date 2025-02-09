@@ -87,16 +87,22 @@
             bindings = <&kp LC(N)>;
             key-positions = <38 16 37>;
         };
+
+        paste_enter {
+            bindings = <&paste_enter>;
+            key-positions = <15 16>;
+        };
     };
 
     macros {
-    paste_enter: new_macro {
-        compatible = "zmk,behavior-macro";
-        #binding-cells = <0>;
-        bindings = <&kp LC(V) &kp ENTER>;
-        label = "PASTE_ENTER";
+        paste_enter: new_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(V) &kp ENTER>, <&macro_press>;
+
+            label = "PASTE_ENTER";
+        };
     };
-};
 
     keymap {
         compatible = "zmk,keymap";
