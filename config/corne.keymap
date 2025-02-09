@@ -90,13 +90,13 @@
     };
 
     macros {
-        new_macro: new_macro {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&none>;
-            label = "NEW_MACRO";
-        };
+    paste_enter: new_macro {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LC(V) &kp ENTER>;
+        label = "PASTE_ENTER";
     };
+};
 
     keymap {
         compatible = "zmk,keymap";
