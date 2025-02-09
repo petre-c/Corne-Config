@@ -92,6 +92,16 @@
             bindings = <&paste_enter>;
             key-positions = <15 16>;
         };
+
+        copy {
+            bindings = <&kp LC(C)>;
+            key-positions = <28 27>;
+        };
+
+        enter2 {
+            bindings = <&kp ENTER>;
+            key-positions = <36 37>;
+        };
     };
 
     macros {
