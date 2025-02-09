@@ -108,8 +108,7 @@
         paste_enter: new_macro {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LC(V) &kp ENTER>, <&macro_press>;
-
+            bindings = <&kp LC(V) &kp ENTER>;
             label = "PASTE_ENTER";
         };
     };
