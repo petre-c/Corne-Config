@@ -63,11 +63,6 @@
     combos {
         compatible = "zmk,combos";
 
-        Enter {
-            bindings = <&kp ENTER>;
-            key-positions = <37 38>;
-        };
-
         Bluetooth {
             bindings = <&mo 4>;
             key-positions = <36 37 38>;
@@ -85,7 +80,7 @@
 
         CtrlN-lh {
             bindings = <&kp LC(N)>;
-            key-positions = <38 16 37>;
+            key-positions = <16 37>;
         };
 
         paste_enter {
@@ -95,12 +90,17 @@
 
         copy {
             bindings = <&kp LC(C)>;
-            key-positions = <28 27>;
+            key-positions = <27 15>;
         };
 
         enter2 {
             bindings = <&kp ENTER>;
             key-positions = <36 37>;
+        };
+
+        tab {
+            bindings = <&kp TAB>;
+            key-positions = <14 15>;
         };
     };
 
