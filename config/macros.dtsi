@@ -1,0 +1,10 @@
+/ {
+  macros {
+    compatible = "zmk,behavior-macro";
+
+    paste_enter_macro: paste_enter_macro {
+      label = "PASTE_ENTER";
+      bindings = <&macro_tap &kp LCTRL &kp V &kp ENTER>;
+    };
+  };
+};
