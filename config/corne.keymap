@@ -102,6 +102,11 @@
             bindings = <&kp TAB>;
             key-positions = <14 15>;
         };
+
+        change_language {
+            bindings = <&kp LS(LEFT_ALT)>;
+            key-positions = <16 17>;
+        };
     };
 
     macros {
