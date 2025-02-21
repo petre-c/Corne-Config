@@ -121,6 +121,11 @@
             bindings = <&mo 3>;
             key-positions = <0 5>;
         };
+
+        bt_clr_all {
+            bindings = <&bt BT_CLR_ALL>;
+            key-positions = <0 24 5>;
+        };
     };
 
     macros {
