@@ -98,7 +98,7 @@
         };
 
         print_screen {
-            bindings = <&kp LG(LS(LEFT_ALT))>;
+            bindings = <&kp LG(LS(S))>;
             key-positions = <36 37>;
         };
 
