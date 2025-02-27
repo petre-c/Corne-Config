@@ -135,6 +135,20 @@
             bindings = <&kp LC(V) &kp ENTER>;
             label = "PASTE_ENTER";
         };
+
+        lambda_sign: lambda_sign {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp EQUAL &kp GT>;
+            label = "LAMBDA_SIGN";
+        };
+
+        lambda_x: lambda_x {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LPAR &kp X &kp SPACE &kp EQUAL &kp GT &kp SPACE &kp X &kp DOT &kp RPAR &kp LEFT_ARROW>;
+            label = "LAMBDA_X";
+        };
     };
 
     keymap {
@@ -181,9 +195,9 @@
 
             display-name = "Raise";
             bindings = <
-&kp ESC  &kp F1         &kp F2            &kp F3             &kp F4            &kp F5                  &kp F6         &kp HOME    &kp UP_ARROW      &kp END            &kp BACKSPACE  &kp BACKSPACE
+&kp ESC  &kp F1         &kp F2            &kp F3             &kp F4            &kp F5                  &kp F6         &kp HOME    &kp UP_ARROW      &kp END            &kp BACKSPACE  &lambda_sign
 &trans   &kp LEFT_META  &kp LEFT_ALT      &kp LSHIFT         &kp LEFT_CONTROL  &trans                  &kp PAGE_UP    &kp LEFT    &kp DOWN          &kp RIGHT          &kp MINUS      &kp EQUAL
-&trans   &trans         &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans            &trans                  &kp PAGE_DOWN  &kp DELETE  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH  &trans
+&trans   &trans         &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans            &trans                  &kp PAGE_DOWN  &kp DELETE  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH  &lambda_x
                                           &trans             &trans            &mt LEFT_SHIFT SPACE    &kp SPACE      &trans      &trans
             >;
         };
