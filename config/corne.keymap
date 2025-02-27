@@ -87,16 +87,6 @@
             key-positions = <28 16>;
         };
 
-        CtrlT-lh {
-            bindings = <&kp LC(T)>;
-            key-positions = <38 16>;
-        };
-
-        CtrlN-lh {
-            bindings = <&kp LC(N)>;
-            key-positions = <16 37>;
-        };
-
         paste_enter {
             bindings = <&paste_enter>;
             key-positions = <27 28>;
@@ -125,6 +115,16 @@
         bt_clr_all {
             bindings = <&bt BT_CLR_ALL>;
             key-positions = <0 24 5>;
+        };
+
+        kb_english {
+            bindings = <&kp LS(LA(NUMBER_1))>;
+            key-positions = <16 38>;
+        };
+
+        kb_georgian {
+            bindings = <&kp LS(LA(N0))>;
+            key-positions = <39 19>;
         };
     };
 
