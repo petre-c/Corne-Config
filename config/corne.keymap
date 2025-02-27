@@ -97,8 +97,8 @@
             key-positions = <27 15>;
         };
 
-        enter2 {
-            bindings = <&kp ENTER>;
+        print_screen {
+            bindings = <&kp LG(LS(LEFT_ALT))>;
             key-positions = <36 37>;
         };
 
