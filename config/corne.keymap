@@ -119,12 +119,12 @@
 
         kb_english {
             bindings = <&kp LS(LA(NUMBER_1))>;
-            key-positions = <16 38>;
+            key-positions = <38 15>;
         };
 
         kb_georgian {
             bindings = <&kp LS(LA(N0))>;
-            key-positions = <39 19>;
+            key-positions = <39 20>;
         };
     };
 
