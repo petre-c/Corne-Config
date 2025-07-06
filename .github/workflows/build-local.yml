@@ -1,0 +1,112 @@
+name: Build (Local Runner)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ local-runner ]
+  pull_request:
+    branches: [ local-runner ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    container:
+      image: zmkfirmware/zmk-build-arm:stable
+    
+    strategy:
+      matrix:
+        include:
+          - board: nice_nano_v2
+            shield: corne_left nice_view_adapter nice_view
+            snippet: studio-rpc-usb-uart
+          - board: nice_nano_v2
+            shield: corne_right nice_view_adapter nice_view
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create build directory
+        run: |
+          # Use persistent workspace if available
+          if [ -d "$HOME/zmk-workspace" ]; then
+            echo "Using persistent ZMK workspace"
+            export WORKSPACE_DIR="$HOME/zmk-workspace"
+          else
+            echo "Creating temporary workspace"
+            export WORKSPACE_DIR="/tmp/zmk-build-$$"
+            mkdir -p "$WORKSPACE_DIR"
+          fi
+          echo "WORKSPACE_DIR=$WORKSPACE_DIR" >> $GITHUB_ENV
+
+      - name: Prepare build environment
+        run: |
+          # Copy config files to build directory
+          mkdir -p "$WORKSPACE_DIR/config"
+          cp -r config/* "$WORKSPACE_DIR/config/"
+          
+          # Set build variables
+          echo "BOARD=${{ matrix.board }}" >> $GITHUB_ENV
+          echo "SHIELD=${{ matrix.shield }}" >> $GITHUB_ENV
+          echo "SNIPPET=${{ matrix.snippet }}" >> $GITHUB_ENV
+          
+          # Create artifact name
+          ARTIFACT_NAME="${{ matrix.shield }}-${{ matrix.board }}"
+          ARTIFACT_NAME="${ARTIFACT_NAME// /_}"
+          echo "ARTIFACT_NAME=$ARTIFACT_NAME" >> $GITHUB_ENV
+
+      - name: West Init (if needed)
+        run: |
+          cd "$WORKSPACE_DIR"
+          if [ ! -d ".west" ]; then
+            west init -l config
+          fi
+
+      - name: West Update
+        run: |
+          cd "$WORKSPACE_DIR"
+          # Only update if modules are older than 1 day
+          if [ ! -f ".last_update" ] || [ $(find ".last_update" -mtime +1 -print) ]; then
+            west update
+            west zephyr-export
+            touch .last_update
+          else
+            echo "Using cached West modules (updated within last 24 hours)"
+          fi
+
+      - name: West Build
+        run: |
+          cd "$WORKSPACE_DIR"
+          
+          # Build command with optional snippet
+          BUILD_CMD="west build -s zmk/app -b ${{ matrix.board }} -d build/${{ env.ARTIFACT_NAME }} -- -DSHIELD=\"${{ matrix.shield }}\""
+          
+          if [ -n "${{ matrix.snippet }}" ]; then
+            BUILD_CMD="$BUILD_CMD -DSNIPPET=\"${{ matrix.snippet }}\""
+          fi
+          
+          # Clean build directory and build
+          rm -rf "build/${{ env.ARTIFACT_NAME }}"
+          eval $BUILD_CMD
+
+      - name: Archive firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware-${{ env.ARTIFACT_NAME }}
+          path: |
+            ${{ env.WORKSPACE_DIR }}/build/${{ env.ARTIFACT_NAME }}/zephyr/zmk.uf2
+            ${{ env.WORKSPACE_DIR }}/build/${{ env.ARTIFACT_NAME }}/zephyr/zmk.hex
+            ${{ env.WORKSPACE_DIR }}/build/${{ env.ARTIFACT_NAME }}/zephyr/zmk.bin
+
+  merge:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Merge Output Artifacts
+    
+    steps:
+      - name: Merge artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: firmware
+          pattern: firmware-*
+          delete-merged: true
