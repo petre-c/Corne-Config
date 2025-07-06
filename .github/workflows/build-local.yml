@@ -26,8 +26,8 @@ jobs:
 
       - name: Create build directory
         run: |
-          # Always use persistent workspace on self-hosted runner
-          WORKSPACE_DIR="/home/runner/zmk-workspace"
+          # Use persistent workspace in runner's home directory
+          WORKSPACE_DIR="$HOME/zmk-workspace"
           mkdir -p "$WORKSPACE_DIR"
           echo "Using workspace: $WORKSPACE_DIR"
           echo "WORKSPACE_DIR=$WORKSPACE_DIR" >> $GITHUB_ENV

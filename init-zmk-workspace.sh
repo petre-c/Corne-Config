@@ -1,7 +1,7 @@
 #!/bin/bash
 # Initialize persistent ZMK workspace for faster builds
 
-WORKSPACE_DIR="/home/runner/zmk-workspace"
+WORKSPACE_DIR="$HOME/zmk-workspace"
 
 echo "Initializing ZMK workspace at $WORKSPACE_DIR"
 mkdir -p "$WORKSPACE_DIR"
