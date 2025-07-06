@@ -10,8 +10,6 @@ on:
 jobs:
   build:
     runs-on: self-hosted
-    container:
-      image: zmkfirmware/zmk-build-arm:stable
     
     strategy:
       matrix:
@@ -28,15 +26,10 @@ jobs:
 
       - name: Create build directory
         run: |
-          # Use persistent workspace if available
-          if [ -d "$HOME/zmk-workspace" ]; then
-            echo "Using persistent ZMK workspace"
-            export WORKSPACE_DIR="$HOME/zmk-workspace"
-          else
-            echo "Creating temporary workspace"
-            export WORKSPACE_DIR="/tmp/zmk-build-$$"
-            mkdir -p "$WORKSPACE_DIR"
-          fi
+          # Always use persistent workspace on self-hosted runner
+          WORKSPACE_DIR="/home/runner/zmk-workspace"
+          mkdir -p "$WORKSPACE_DIR"
+          echo "Using workspace: $WORKSPACE_DIR"
           echo "WORKSPACE_DIR=$WORKSPACE_DIR" >> $GITHUB_ENV
 
       - name: Prepare build environment
@@ -65,13 +58,15 @@ jobs:
       - name: West Update
         run: |
           cd "$WORKSPACE_DIR"
-          # Only update if modules are older than 1 day
-          if [ ! -f ".last_update" ] || [ $(find ".last_update" -mtime +1 -print) ]; then
+          # Check if we need to update (older than 1 day or missing)
+          if [ ! -f ".last_update" ] || [ ! -z "$(find . -maxdepth 1 -name '.last_update' -mtime +1 -print 2>/dev/null)" ]; then
+            echo "Updating West modules..."
             west update
             west zephyr-export
             touch .last_update
           else
-            echo "Using cached West modules (updated within last 24 hours)"
+            echo "Using cached West modules (last updated: $(stat -c %y .last_update 2>/dev/null || stat -f %Sm .last_update))"
+            echo "Modules directory size: $(du -sh modules 2>/dev/null | cut -f1)"
           fi
 
       - name: West Build
@@ -79,14 +74,14 @@ jobs:
           cd "$WORKSPACE_DIR"
           
           # Build command with optional snippet
-          BUILD_CMD="west build -s zmk/app -b ${{ matrix.board }} -d build/${{ env.ARTIFACT_NAME }} -- -DSHIELD=\"${{ matrix.shield }}\""
+          BUILD_CMD="west build -s zmk/app -b ${{ matrix.board }} -d build/$ARTIFACT_NAME -- -DSHIELD=\"${{ matrix.shield }}\""
           
           if [ -n "${{ matrix.snippet }}" ]; then
             BUILD_CMD="$BUILD_CMD -DSNIPPET=\"${{ matrix.snippet }}\""
           fi
           
           # Clean build directory and build
-          rm -rf "build/${{ env.ARTIFACT_NAME }}"
+          rm -rf "build/$ARTIFACT_NAME"
           eval $BUILD_CMD
 
       - name: Archive firmware
@@ -95,8 +90,6 @@ jobs:
           name: firmware-${{ env.ARTIFACT_NAME }}
           path: |
             ${{ env.WORKSPACE_DIR }}/build/${{ env.ARTIFACT_NAME }}/zephyr/zmk.uf2
-            ${{ env.WORKSPACE_DIR }}/build/${{ env.ARTIFACT_NAME }}/zephyr/zmk.hex
-            ${{ env.WORKSPACE_DIR }}/build/${{ env.ARTIFACT_NAME }}/zephyr/zmk.bin
 
   merge:
     runs-on: ubuntu-latest
