@@ -1,0 +1,14 @@
+# Firmware output
+firmware/
+
+# Build artifacts
+*.uf2
+*.hex
+*.bin
+
+# IDE
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
