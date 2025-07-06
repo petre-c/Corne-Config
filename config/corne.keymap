@@ -77,11 +77,6 @@
     combos {
         compatible = "zmk,combos";
 
-        Bluetooth {
-            bindings = <&mo 4>;
-            key-positions = <36 37 38>;
-        };
-
         Paste {
             bindings = <&kp LC(V)>;
             key-positions = <28 16>;
@@ -104,7 +99,7 @@
 
         tab {
             bindings = <&kp TAB>;
-            key-positions = <14 15>;
+            key-positions = <17 16>;
         };
 
         L3 {
@@ -117,14 +112,14 @@
             key-positions = <0 24 5>;
         };
 
-        kb_english {
-            bindings = <&kp LS(LA(NUMBER_1))>;
-            key-positions = <38 15>;
+        minus {
+            bindings = <&kp MINUS>;
+            key-positions = <39 22>;
         };
 
-        kb_georgian {
-            bindings = <&kp LS(LA(N0))>;
-            key-positions = <39 20>;
+        equals {
+            bindings = <&kp EQUAL>;
+            key-positions = <39 23>;
         };
     };
 
@@ -148,6 +143,13 @@
             #binding-cells = <0>;
             bindings = <&kp LPAR &kp X &kp SPACE &kp EQUAL &kp GT &kp SPACE &kp X &kp DOT &kp RPAR &kp LEFT_ARROW>;
             label = "LAMBDA_X";
+        };
+
+        brackets: brackets {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LPAR &kp RPAR &kp LEFT>;
+            label = "BRACKETS";
         };
     };
 
