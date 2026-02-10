@@ -12,3 +12,10 @@ firmware/
 # OS
 .DS_Store
 Thumbs.db
+
+# Jujutsu VCS
+.jj/
+
+# Local tooling artifacts
+PROJECTNAME
+nul
