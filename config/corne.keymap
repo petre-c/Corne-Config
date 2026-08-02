@@ -260,6 +260,20 @@
             label = "LAMBDA_X";
         };
 
+        // Layout-independent backtick for Windows: sends Alt+Numpad-096, which inserts
+        // the character by code and bypasses the active input language entirely —
+        // types ` whether the OS layout is English or Georgian (where the grave key
+        // normally yields a low quote). Caveat: Windows Alt-codes need NumLock ON,
+        // and a few apps (some terminals) don't accept Alt-code input.
+        grave_const: grave_const {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LALT>, <&macro_tap &kp KP_N0 &kp KP_N9 &kp KP_N6>, <&macro_release &kp LALT>;
+            label = "GRAVE_CONST";
+        };
+
         brackets: brackets {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -303,7 +317,7 @@
 
             display-name = "Lower";
             bindings = <
-&kp GRAVE             &kp F1                   &kp F2                  &kp F3                &kp F4                      &kp F5              &kp F6        &kp F7                 &kp F8               &kp F9             &kp F10                &kp BACKSPACE
+&grave_const          &kp F1                   &kp F2                  &kp F3                &kp F4                      &kp F5              &kp F6        &kp F7                 &kp F8               &kp F9             &kp F10                &kp BACKSPACE
 &kp LS(LA(N0))        &HML LEFT_META NUMBER_1  &HML LEFT_ALT NUMBER_2  &HML LSHIFT NUMBER_3  &HML LEFT_CONTROL NUMBER_4  &kp N5              &kp NUMBER_6  &HMR RIGHT_CONTROL N7  &HMR RIGHT_SHIFT N8  &HMR RIGHT_ALT N9  &kp N0                 &kp F12
 &kp LS(LA(NUMBER_1))  &kp EXCLAMATION          &kp AT_SIGN             &kp HASH              &kp DOLLAR                  &kp PERCENT         &kp CARET     &kp AMPERSAND          &kp ASTERISK         &trans             &kp RIGHT_PARENTHESIS  &kp F11
                                                                        &kp LANGUAGE_2        &kp LS(LEFT_ALT)            &mt LSHIFT SPACE    &TD0          &kp LG(LS(LEFT))       &kp LANG1
