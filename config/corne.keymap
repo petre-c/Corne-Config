@@ -289,8 +289,11 @@
             // ---------------------------------------------------------------------------------------------------------------
             // |    `     |  F1   |  F2   |  F3   |  F4   |  F5 |   |  F6 |  F7   |  F8   |  F9   | F10 | BSPC |
             // | Sh+Alt+0 | 1/Win | 2/Alt | 3/Sft | 4/Ctl |  5  |   |  6  | 7/Ctl | 8/Sft | 9/Alt |  0  | F12  |
-            // | Sh+Alt+1 |   !   |   @   |   #   |   $   |  %  |   |  ^  |   &   |   *   | trans |  )  | F11  |
+            // | Sh+Alt+1 |   !   |   @   |   #   |   $   |  %  |   |  ^  |   &   |   *   |   .   |  )  | F11  |
             //                    | LANG2 | Sh+Alt | SFT/SPC |   | TD0(Sft/Ent) | Win+Sh+Left | LANG1 |
+            //
+            // Note: the "(" slot is intentionally &trans -> base-layer DOT, so a decimal
+            // point sits next to the number homerow. "(" is not on this layer by design.
 
             display-name = "Lower";
             bindings = <
