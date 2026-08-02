@@ -78,26 +78,6 @@
             hold-trigger-on-release;
         };
 
-        // Shift-on-Space thumb key: replaces plain &mt, which used ZMK's default
-        // mod-tap timing (hold-preferred, 200ms) and was therefore misfire-prone.
-        //  - balanced: an interrupting key must be pressed AND released while Space is
-        //    held to count as a hold, so fast space->letter rolls still give a space
-        //  - quick-tap: tap-then-hold auto-repeats space
-        // Deliberately NO require-prior-idle here: Shift is needed mid-typing-flow
-        // (e.g. "?" = shift-space + / right after a word), and prior-idle would force
-        // the key to resolve as a plain space in exactly those moments.
-        // No hold-trigger-key-positions either — Shift must combine with both hands.
-        MT_SPC: MT_SPC {
-            compatible = "zmk,behavior-hold-tap";
-            label = "MT_SPC";
-            bindings = <&kp>, <&kp>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <280>;
-            quick-tap-ms = <175>;
-            flavor = "balanced";
-        };
-
         // Win-on-A only: identical to HML, but with the Windows system shortcuts that
         // collide with common word-initial "a" rolls removed from the trigger list:
         //   L (21) -> Win+L would LOCK the PC ("all", "also")
@@ -296,7 +276,7 @@
 &kp ESCAPE            &kp Q             &kp W                 &kp E             &kp R                &kp T               &kp Y        &kp U                 &kp I      &kp O                  &kp P                     &kp BSPC
 &kp TAB               &HML_A LWIN A  &HML_S LEFT_ALT S  &HML LSHIFT D  &HML LEFT_CONTROL F  &kp G               &kp H        &HMR RIGHT_CONTROL J  &HMR RSHIFT K  &HMR_L RIGHT_ALT L  &HMR RWIN SEMICOLON  &kp APOSTROPHE
 &kp LS(LA(NUMBER_1))  &kp Z             &kp X                 &kp C             &kp V                &kp B               &kp N        &kp M                 &kp COMMA  &kp DOT                &kp FSLH                  &kp LS(LA(N0))
-                                                              &kp LEFT_CONTROL  &lt 1 ENTER          &MT_SPC LSHIFT SPACE    &lt 2 SPACE  &lt 1 ENTER           &mo 4
+                                                              &kp LEFT_CONTROL  &lt 1 ENTER          &mt LSHIFT SPACE    &lt 2 SPACE  &lt 1 ENTER           &mo 4
             >;
         };
 
@@ -315,7 +295,7 @@
 &kp GRAVE             &kp F1                   &kp F2                  &kp F3                &kp F4                      &kp F5              &kp F6        &kp F7                 &kp F8               &kp F9             &kp F10                &kp BACKSPACE
 &kp LS(LA(N0))        &HML LEFT_META NUMBER_1  &HML LEFT_ALT NUMBER_2  &HML LSHIFT NUMBER_3  &HML LEFT_CONTROL NUMBER_4  &kp N5              &kp NUMBER_6  &HMR RIGHT_CONTROL N7  &HMR RIGHT_SHIFT N8  &HMR RIGHT_ALT N9  &kp N0                 &kp F12
 &kp LS(LA(NUMBER_1))  &kp EXCLAMATION          &kp AT_SIGN             &kp HASH              &kp DOLLAR                  &kp PERCENT         &kp CARET     &kp AMPERSAND          &kp ASTERISK         &trans             &kp RIGHT_PARENTHESIS  &kp F11
-                                                                       &kp LANGUAGE_2        &kp LS(LEFT_ALT)            &MT_SPC LSHIFT SPACE    &TD0          &kp LG(LS(LEFT))       &kp LANG1
+                                                                       &kp LANGUAGE_2        &kp LS(LEFT_ALT)            &mt LSHIFT SPACE    &TD0          &kp LG(LS(LEFT))       &kp LANG1
             >;
         };
 
@@ -334,7 +314,7 @@
 &kp ESC  &kp F1         &kp F2            &kp F3             &kp F4            &kp F5                  &kp F6         &kp HOME    &kp UP_ARROW      &kp END            &kp BACKSPACE  &lambda_sign
 &trans   &kp LEFT_META  &kp LEFT_ALT      &kp LSHIFT         &kp LEFT_CONTROL  &swapper                &kp PAGE_UP    &kp LEFT    &kp DOWN          &kp RIGHT          &kp MINUS      &kp EQUAL
 &trans   &trans         &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans            &win_swapper            &kp PAGE_DOWN  &kp DELETE  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH  &lambda_x
-                                          &trans             &trans            &MT_SPC LEFT_SHIFT SPACE    &kp SPACE      &trans      &trans
+                                          &trans             &trans            &mt LEFT_SHIFT SPACE    &kp SPACE      &trans      &trans
             >;
         };
 
