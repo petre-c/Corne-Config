@@ -222,18 +222,19 @@
             require-prior-idle-ms = <150>;
         };
 
-        // Parens on top-row horizontal combos: U+I = ( and I+O = ). The base layer
-        // has no "(" key (the Lower-layer slot is a deliberate dot pass-through),
-        // so these make parens first-class citizens for code.
+        // Parens on right-hand VERTICAL pairs (easier to press than horizontal ones),
+        // mirroring the left-hand home+bottom verticals (cut = X+S, copy = C+D,
+        // paste = V+F): K+, = ( and L+. = ). Combos are layer-agnostic, so "(" stays
+        // reachable even while holding Lower — the dot pass-through keeps its slot.
         lpar {
             bindings = <&kp LPAR>;
-            key-positions = <7 8>;
+            key-positions = <20 32>;
             require-prior-idle-ms = <150>;
         };
 
         rpar {
             bindings = <&kp RPAR>;
-            key-positions = <8 9>;
+            key-positions = <21 33>;
             require-prior-idle-ms = <150>;
         };
 
@@ -289,7 +290,7 @@
             //                    | CTRL | L1/ENT | SFT/SPC |   | L2/SPC | L1/ENT | L4 |
             //
             // Combos: R+F=Win+R  G+F=Tab  D+K=CapsWord  X+S=Cut  C+D=Copy  V+F=Paste  C+V=Paste+Enter
-            //         U+I=(  I+O=)  SPC+;=Minus  SPC+'=Equals  ESC+T=L3  thumb36+37=PrintScreen
+            //         K+,=(  L+.=)  SPC+;=Minus  SPC+'=Equals  ESC+T=L3  thumb36+37=PrintScreen
 
             display-name = "Base";
             bindings = <
