@@ -193,6 +193,16 @@
             key-positions = <0 24 5>;
         };
 
+        // Both Enter thumbs (37+40) pressed together -> latch the numbers layer (&tog 1).
+        // Combos are position-based and layer-agnostic, so the SAME chord toggles it
+        // back off while latched. Each thumb alone keeps its normal tap-Enter /
+        // hold-momentary behavior, and no Lower-layer binding is displaced.
+        // Deliberately no require-prior-idle: latching right after typing must work.
+        num_toggle {
+            bindings = <&tog 1>;
+            key-positions = <37 40>;
+        };
+
         // R+F pressed together -> Win+R (Run dialog). Vertical pair like copy (C+D)
         // and paste (V+F); "rf" is a rare bigram so accidental fires while typing are unlikely.
         win_r {
@@ -270,6 +280,7 @@
             //
             // Combos: R+F=Win+R  G+F=Tab  D+K=CapsWord  X+S=Cut  C+D=Copy  V+F=Paste  C+V=Paste+Enter
             //         K+,=(  L+.=)  SPC+;=Minus  SPC+'=Equals  ESC+T=L3  thumb36+37=PrintScreen
+            //         BothEnterThumbs=latch/unlatch numbers layer
 
             display-name = "Base";
             bindings = <
