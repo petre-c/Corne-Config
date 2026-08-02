@@ -2,10 +2,19 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    # urob's ZMK modules (tri-state is needed for the Alt-Tab / Win-Tab swappers)
+    - name: urob
+      url-base: https://github.com/urob
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: main
       import: app/west.yml
+    # Provides the "zmk,behavior-tri-state" behavior: a key that presses a mod on
+    # first tap, keeps it held across repeated taps, and releases it when any other
+    # key is pressed or the layer is left. main tracks ZMK main, matching our zmk rev.
+    - name: zmk-tri-state
+      remote: urob
+      revision: main
   self:
     path: config

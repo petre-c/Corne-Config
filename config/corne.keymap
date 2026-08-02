@@ -38,6 +38,111 @@
             hold-trigger-on-release;
         };
 
+        // Alt-on-L only: identical to HMR, but with A (pos 13) and E (pos 3) removed
+        // from the trigger list. Word-initial rolls like "la..." / "le..." land after a
+        // typing pause, so require-prior-idle can't save them — excluding the positions
+        // guarantees L+A / L+E always resolve as taps and never fire Alt+A / Alt+E.
+        // All other left-hand keys still combine with L-held-as-Alt (e.g. Alt+Tab via L+Tab).
+        HMR_L: HMR_L {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HMR_L";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            flavor = "balanced";
+            hold-trigger-key-positions = <0 1 2 4 5 12 14 15 16 17 24 25 26 27 28 29 36 37 38 39 40 41>;
+            require-prior-idle-ms = <150>;
+            hold-trigger-on-release;
+        };
+
+        // Alt-on-S only: identical to HML, but with the right-hand letters that form
+        // common word-initial "s" bigrams removed, so rolls like "sh", "so", "si",
+        // "su", "sy", "sp", "sk", "sl", "sn", "sm" can never fire Alt+<letter> menu
+        // accelerators (ribbon/menu focus in Office, browsers, etc.):
+        //   Y (6), U (7), I (8), O (9), P (10), H (18), K (20), L (21), N (30), M (31)
+        // Still available while holding S as Alt: Alt+J, Alt+Backspace, Alt+Enter
+        // (properties/fullscreen), Alt+Space (window menu), and Alt+punctuation.
+        HML_S: HML_S {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HML_S";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            flavor = "balanced";
+            hold-trigger-key-positions = <36 37 38 11 19 22 23 32 33 34 35 39 40 41>;
+            require-prior-idle-ms = <150>;
+            hold-trigger-on-release;
+        };
+
+        // Shift-on-Space thumb key: replaces plain &mt, which used ZMK's default
+        // mod-tap timing (hold-preferred, 200ms, no prior-idle) and was therefore the
+        // most misfire-prone key on the board. Same tuning as the homerow mods:
+        //  - require-prior-idle: pressing Space mid-typing-flow instantly resolves as
+        //    a space, never as Shift
+        //  - balanced: an interrupting key must be pressed AND released to count as hold
+        //  - quick-tap: tap-then-hold auto-repeats space
+        // No hold-trigger-key-positions on purpose — Shift must combine with keys on
+        // both hands.
+        MT_SPC: MT_SPC {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MT_SPC";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            flavor = "balanced";
+            require-prior-idle-ms = <150>;
+        };
+
+        // Win-on-A only: identical to HML, but with the Windows system shortcuts that
+        // collide with common word-initial "a" rolls removed from the trigger list:
+        //   L (21) -> Win+L would LOCK the PC ("all", "also")
+        //   N (30) -> Win+N notification center ("and", "any")
+        //   M (31) -> Win+M minimize all windows ("am")
+        //   H (18) -> Win+H voice typing popup ("ah")
+        //   P (10) -> Win+P projection sidebar ("app")
+        //   U (7)  -> Win+U accessibility settings ("auto")
+        // Useful ones like Win+I (settings), Win+K (cast), Win+. (emoji) remain available.
+        HML_A: HML_A {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HML_A";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            flavor = "balanced";
+            hold-trigger-key-positions = <36 37 38 6 8 9 11 19 20 22 23 32 33 34 35 39 40 41>;
+            require-prior-idle-ms = <150>;
+            hold-trigger-on-release;
+        };
+
+        // urob's swapper (zmk-tri-state module): smart Alt+Tab. First press holds Alt
+        // and taps Tab; each further press taps Tab again while Alt stays held, so you
+        // can cycle through windows from a single key. Alt is released as soon as any
+        // non-ignored key is pressed or the layer is left.
+        // ignored-key-positions: 15 (Shift on the raise layer, for reverse cycling
+        // with Alt+Shift+Tab) and 39 (the raise-layer thumb key itself).
+        swapper: swapper {
+            compatible = "zmk,behavior-tri-state";
+            #binding-cells = <0>;
+            bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
+            ignored-key-positions = <15 39>;
+        };
+
+        // Same idea with the Windows key: opens Task View / workspaces (Win+Tab).
+        win_swapper: win_swapper {
+            compatible = "zmk,behavior-tri-state";
+            #binding-cells = <0>;
+            bindings = <&kt LGUI>, <&kp TAB>, <&kt LGUI>;
+            ignored-key-positions = <15 39>;
+        };
+
         TD0: TD0 {
             compatible = "zmk,behavior-tap-dance";
             label = "TD0";
@@ -50,19 +155,42 @@
     combos {
         compatible = "zmk,combos";
 
+        // require-prior-idle-ms on the combos that sit on typing keys: the combo only
+        // fires if no other key was pressed in the last 150ms, so fast rolls while
+        // typing (e.g. "gf", "cd" bigrams) can never trigger them accidentally.
         Paste {
             bindings = <&kp LC(V)>;
             key-positions = <28 16>;
+            require-prior-idle-ms = <150>;
         };
 
         paste_enter {
             bindings = <&paste_enter>;
             key-positions = <27 28>;
+            require-prior-idle-ms = <150>;
         };
 
         copy {
             bindings = <&kp LC(C)>;
             key-positions = <27 15>;
+            require-prior-idle-ms = <150>;
+        };
+
+        // X+S pressed together -> Ctrl+X, completing the vertical cut/copy/paste set
+        // (cut = X+S, copy = C+D, paste = V+F).
+        cut {
+            bindings = <&kp LC(X)>;
+            key-positions = <26 14>;
+            require-prior-idle-ms = <150>;
+        };
+
+        // D+K (both index-adjacent home keys) -> Caps Word: capitalizes everything
+        // until a word-breaking key (space, punctuation) is pressed. Great for
+        // CONSTANTS_LIKE_THIS since underscore does not break it.
+        caps_word_combo {
+            bindings = <&caps_word>;
+            key-positions = <15 20>;
+            require-prior-idle-ms = <150>;
         };
 
         print_screen {
@@ -73,6 +201,7 @@
         tab {
             bindings = <&kp TAB>;
             key-positions = <17 16>;
+            require-prior-idle-ms = <150>;
         };
 
         L3 {
@@ -83,6 +212,14 @@
         bt_clr_all {
             bindings = <&bt BT_CLR_ALL>;
             key-positions = <0 24 5>;
+        };
+
+        // R+F pressed together -> Win+R (Run dialog). Vertical pair like copy (C+D)
+        // and paste (V+F); "rf" is a rare bigram so accidental fires while typing are unlikely.
+        win_r {
+            bindings = <&kp LG(R)>;
+            key-positions = <4 16>;
+            require-prior-idle-ms = <150>;
         };
 
         minus {
@@ -130,50 +267,56 @@
         compatible = "zmk,keymap";
 
         default_layer {
-            // -----------------------------------------------------------------------------------------
-            // |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
-            // | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-            // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
-            //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
+            // ---------------------------------------------------------------------------------------------------------------
+            // |   ESC    |   Q   |   W   |   E   |   R   |  T  |   |  Y  |   U   |   I   |   O   |   P   |   BSPC   |
+            // |   TAB    | A/Win | S/Alt | D/Sft | F/Ctl |  G  |   |  H  | J/Ctl | K/Sft | L/Alt | ;/Win |    '     |
+            // | Sh+Alt+1 |   Z   |   X   |   C   |   V   |  B  |   |  N  |   M   |   ,   |   .   |   /   | Sh+Alt+0 |
+            //                    | CTRL | L1/ENT | SFT/SPC |   | L2/SPC | L1/ENT | L4 |
+            //
+            // Combos: R+F=Win+R  G+F=Tab  D+K=CapsWord  X+S=Cut  C+D=Copy  V+F=Paste  C+V=Paste+Enter
+            //         SPC+;=Minus  SPC+'=Equals  ESC+T=L3  thumb36+37=PrintScreen
 
             display-name = "Base";
             bindings = <
 &kp ESCAPE            &kp Q             &kp W                 &kp E             &kp R                &kp T               &kp Y        &kp U                 &kp I      &kp O                  &kp P                     &kp BSPC
-&kp TAB               &HML LWIN A  &HML LEFT_ALT S  &HML LSHIFT D  &HML LEFT_CONTROL F  &kp G               &kp H        &HMR RIGHT_CONTROL J  &HMR RSHIFT K  &HMR RIGHT_ALT L  &HMR RWIN SEMICOLON  &kp APOSTROPHE
+&kp TAB               &HML_A LWIN A  &HML_S LEFT_ALT S  &HML LSHIFT D  &HML LEFT_CONTROL F  &kp G               &kp H        &HMR RIGHT_CONTROL J  &HMR RSHIFT K  &HMR_L RIGHT_ALT L  &HMR RWIN SEMICOLON  &kp APOSTROPHE
 &kp LS(LA(NUMBER_1))  &kp Z             &kp X                 &kp C             &kp V                &kp B               &kp N        &kp M                 &kp COMMA  &kp DOT                &kp FSLH                  &kp LS(LA(N0))
-                                                              &kp LEFT_CONTROL  &lt 1 ENTER          &mt LSHIFT SPACE    &lt 2 SPACE  &lt 1 ENTER           &mo 4
+                                                              &kp LEFT_CONTROL  &lt 1 ENTER          &MT_SPC LSHIFT SPACE    &lt 2 SPACE  &lt 1 ENTER           &mo 4
             >;
         };
 
         lower_layer {
-            // -----------------------------------------------------------------------------------------
-            // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
-            // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-            // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-            //                    | GUI |     | SPC |   | ENT |     | ALT |
+            // ---------------------------------------------------------------------------------------------------------------
+            // |    `     |  F1   |  F2   |  F3   |  F4   |  F5 |   |  F6 |  F7   |  F8   |  F9   | F10 | BSPC |
+            // | Sh+Alt+0 | 1/Win | 2/Alt | 3/Sft | 4/Ctl |  5  |   |  6  | 7/Ctl | 8/Sft | 9/Alt |  0  | F12  |
+            // | Sh+Alt+1 |   !   |   @   |   #   |   $   |  %  |   |  ^  |   &   |   *   | trans |  )  | F11  |
+            //                    | LANG2 | Sh+Alt | SFT/SPC |   | TD0(Sft/Ent) | Win+Sh+Left | LANG1 |
 
             display-name = "Lower";
             bindings = <
 &kp GRAVE             &kp F1                   &kp F2                  &kp F3                &kp F4                      &kp F5              &kp F6        &kp F7                 &kp F8               &kp F9             &kp F10                &kp BACKSPACE
 &kp LS(LA(N0))        &HML LEFT_META NUMBER_1  &HML LEFT_ALT NUMBER_2  &HML LSHIFT NUMBER_3  &HML LEFT_CONTROL NUMBER_4  &kp N5              &kp NUMBER_6  &HMR RIGHT_CONTROL N7  &HMR RIGHT_SHIFT N8  &HMR RIGHT_ALT N9  &kp N0                 &kp F12
 &kp LS(LA(NUMBER_1))  &kp EXCLAMATION          &kp AT_SIGN             &kp HASH              &kp DOLLAR                  &kp PERCENT         &kp CARET     &kp AMPERSAND          &kp ASTERISK         &trans             &kp RIGHT_PARENTHESIS  &kp F11
-                                                                       &kp LANGUAGE_2        &kp LS(LEFT_ALT)            &mt LSHIFT SPACE    &TD0          &kp LG(LS(LEFT))       &kp LANG1
+                                                                       &kp LANGUAGE_2        &kp LS(LEFT_ALT)            &MT_SPC LSHIFT SPACE    &TD0          &kp LG(LS(LEFT))       &kp LANG1
             >;
         };
 
         SpaceFN {
-            // -----------------------------------------------------------------------------------------
-            // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
-            // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-            // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-            //                    | GUI |     | SPC |   | ENT |     | ALT |
+            // ---------------------------------------------------------------------------------------------------------------
+            // | ESC   | F1  | F2  | F3  | F4  |     F5     |   |  F6  | HOME | UP   | END  | BSPC |   =>    |
+            // | trans | Win | Alt | Sft | Ctl |  AltTabSwp |   | PGUP | LEFT | DOWN | RGHT |  -   |   =     |
+            // | trans |     |  [  |  ]  |     |  WinTabSwp |   | PGDN | DEL  |  [   |  ]   |  \   | (x=>x.) |
+            //                     | trans | trans | SFT/SPC |   | SPC | trans | trans |
+            //
+            // AltTabSwp (G slot): hold right thumb + tap repeatedly to cycle windows (Alt stays held).
+            // WinTabSwp (B slot): Win+Tab -> Task View / workspaces.
 
             display-name = "Raise";
             bindings = <
 &kp ESC  &kp F1         &kp F2            &kp F3             &kp F4            &kp F5                  &kp F6         &kp HOME    &kp UP_ARROW      &kp END            &kp BACKSPACE  &lambda_sign
-&trans   &kp LEFT_META  &kp LEFT_ALT      &kp LSHIFT         &kp LEFT_CONTROL  &trans                  &kp PAGE_UP    &kp LEFT    &kp DOWN          &kp RIGHT          &kp MINUS      &kp EQUAL
-&trans   &trans         &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans            &trans                  &kp PAGE_DOWN  &kp DELETE  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH  &lambda_x
-                                          &trans             &trans            &mt LEFT_SHIFT SPACE    &kp SPACE      &trans      &trans
+&trans   &kp LEFT_META  &kp LEFT_ALT      &kp LSHIFT         &kp LEFT_CONTROL  &swapper                &kp PAGE_UP    &kp LEFT    &kp DOWN          &kp RIGHT          &kp MINUS      &kp EQUAL
+&trans   &trans         &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans            &win_swapper            &kp PAGE_DOWN  &kp DELETE  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH  &lambda_x
+                                          &trans             &trans            &MT_SPC LEFT_SHIFT SPACE    &kp SPACE      &trans      &trans
             >;
         };
 
