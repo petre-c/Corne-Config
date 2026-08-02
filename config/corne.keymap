@@ -79,14 +79,14 @@
         };
 
         // Shift-on-Space thumb key: replaces plain &mt, which used ZMK's default
-        // mod-tap timing (hold-preferred, 200ms, no prior-idle) and was therefore the
-        // most misfire-prone key on the board. Same tuning as the homerow mods:
-        //  - require-prior-idle: pressing Space mid-typing-flow instantly resolves as
-        //    a space, never as Shift
-        //  - balanced: an interrupting key must be pressed AND released to count as hold
+        // mod-tap timing (hold-preferred, 200ms) and was therefore misfire-prone.
+        //  - balanced: an interrupting key must be pressed AND released while Space is
+        //    held to count as a hold, so fast space->letter rolls still give a space
         //  - quick-tap: tap-then-hold auto-repeats space
-        // No hold-trigger-key-positions on purpose — Shift must combine with keys on
-        // both hands.
+        // Deliberately NO require-prior-idle here: Shift is needed mid-typing-flow
+        // (e.g. "?" = shift-space + / right after a word), and prior-idle would force
+        // the key to resolve as a plain space in exactly those moments.
+        // No hold-trigger-key-positions either — Shift must combine with both hands.
         MT_SPC: MT_SPC {
             compatible = "zmk,behavior-hold-tap";
             label = "MT_SPC";
@@ -96,7 +96,6 @@
             tapping-term-ms = <280>;
             quick-tap-ms = <175>;
             flavor = "balanced";
-            require-prior-idle-ms = <150>;
         };
 
         // Win-on-A only: identical to HML, but with the Windows system shortcuts that
