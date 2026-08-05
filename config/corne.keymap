@@ -122,6 +122,22 @@
             ignored-key-positions = <15 39>;
         };
 
+        // Ctrl+Win+Tab workspace cycler, same tri-state trick as the two swappers above
+        // but with TWO modifiers held: &kt only toggles one key, so the hold/release of
+        // Ctrl+Win is done with the cw_hold / cw_release macros (macro_press with no
+        // matching release leaves the mods down until cw_release fires).
+        // First press  -> Ctrl+Win down, tap Tab. Further presses -> more Tab taps with
+        // Ctrl+Win still held, so the host keeps cycling workspaces in one gesture.
+        // Ctrl+Win are released when the Lower layer is left or any non-ignored key is hit.
+        // ignored-key-positions: 37/40 (the Lower-layer Enter thumbs that hold the layer)
+        // and 15 (Shift on Lower, so Ctrl+Win+Shift+Tab can cycle the other way).
+        ws_swapper: ws_swapper {
+            compatible = "zmk,behavior-tri-state";
+            #binding-cells = <0>;
+            bindings = <&cw_hold>, <&kp TAB>, <&cw_release>;
+            ignored-key-positions = <15 37 40>;
+        };
+
         TD0: TD0 {
             compatible = "zmk,behavior-tap-dance";
             label = "TD0";
@@ -274,6 +290,22 @@
             label = "GRAVE_CONST";
         };
 
+        // Halves of the Ctrl+Win hold used by ws_swapper. Deliberately press-only /
+        // release-only: they are not usable as normal keys on their own.
+        cw_hold: cw_hold {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LGUI>;
+            label = "CW_HOLD";
+        };
+
+        cw_release: cw_release {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_release &kp LCTRL &kp LGUI>;
+            label = "CW_RELEASE";
+        };
+
         brackets: brackets {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -308,9 +340,12 @@
         lower_layer {
             // ---------------------------------------------------------------------------------------------------------------
             // |    `     |  F1   |  F2   |  F3   |  F4   |  F5 |   |  F6 |  F7   |  F8   |  F9   | F10 | BSPC |
-            // | Ctl+Win+Tab | 1/Win | 2/Alt | 3/Sft | 4/Ctl |  5  |   |  6  | 7/Ctl | 8/Sft | 9/Alt |  0  | F12  |
+            // | WsSwapper | 1/Win | 2/Alt | 3/Sft | 4/Ctl |  5  |   |  6  | 7/Ctl | 8/Sft | 9/Alt |  0  | F12  |
             // | Sh+Alt+1 |   !   |   @   |   #   |   $   |  %  |   |  ^  |   &   |   *   |   .   |  )  | F11  |
             //                    | LANG2 | Sh+Alt | SFT/SPC |   | TD0(Sft/Ent) | Win+Sh+Left | LANG1 |
+            //
+            // WsSwapper (TAB slot): hold Lower + tap Tab repeatedly to cycle workspaces
+            // with Ctrl+Win held (the host's Ctrl+Win+Tab shortcut).
             //
             // Note: the "(" slot is intentionally &trans -> base-layer DOT, so a decimal
             // point sits next to the number homerow. "(" is not on this layer by design.
@@ -318,10 +353,11 @@
             display-name = "Lower";
             bindings = <
 &grave_const          &kp F1                   &kp F2                  &kp F3                &kp F4                      &kp F5              &kp F6        &kp F7                 &kp F8               &kp F9             &kp F10                &kp BACKSPACE
-// Position 12 (the base-layer TAB key) on Lower -> Ctrl+Win+Tab, the host's
-// workspace-cycling shortcut. It replaces a duplicate Sh+Alt+0, which still
-// lives on the base layer at position 35.
-&kp LC(LG(TAB))       &HML LEFT_META NUMBER_1  &HML LEFT_ALT NUMBER_2  &HML LSHIFT NUMBER_3  &HML LEFT_CONTROL NUMBER_4  &kp N5              &kp NUMBER_6  &HMR RIGHT_CONTROL N7  &HMR RIGHT_SHIFT N8  &HMR RIGHT_ALT N9  &kp N0                 &kp F12
+// Position 12 (the base-layer TAB key) on Lower -> ws_swapper: hold Lower and tap
+// Tab repeatedly to keep cycling workspaces with Ctrl+Win held down (see the
+// ws_swapper behavior). Replaces a duplicate Sh+Alt+0, which still lives on the
+// base layer at position 35.
+&ws_swapper           &HML LEFT_META NUMBER_1  &HML LEFT_ALT NUMBER_2  &HML LSHIFT NUMBER_3  &HML LEFT_CONTROL NUMBER_4  &kp N5              &kp NUMBER_6  &HMR RIGHT_CONTROL N7  &HMR RIGHT_SHIFT N8  &HMR RIGHT_ALT N9  &kp N0                 &kp F12
 &kp LS(LA(NUMBER_1))  &kp EXCLAMATION          &kp AT_SIGN             &kp HASH              &kp DOLLAR                  &kp PERCENT         &kp CARET     &kp AMPERSAND          &kp ASTERISK         &trans             &kp RIGHT_PARENTHESIS  &kp F11
                                                                        &kp LANGUAGE_2        &kp LS(LEFT_ALT)            &mt LSHIFT SPACE    &TD0          &kp LG(LS(LEFT))       &kp LANG1
             >;
