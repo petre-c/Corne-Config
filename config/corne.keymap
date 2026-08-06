@@ -122,19 +122,21 @@
             ignored-key-positions = <15 39>;
         };
 
-        // Ctrl+Win+Tab workspace cycler, same tri-state trick as the two swappers above
-        // but with TWO modifiers held: &kt only toggles one key, so the hold/release of
-        // Ctrl+Win is done with the cw_hold / cw_release macros (macro_press with no
-        // matching release leaves the mods down until cw_release fires).
-        // First press  -> Ctrl+Win down, tap Tab. Further presses -> more Tab taps with
-        // Ctrl+Win still held, so the host keeps cycling workspaces in one gesture.
-        // Ctrl+Win are released when the Lower layer is left or any non-ignored key is hit.
+        // Ctrl+Win+Tab workspace cycler, same tri-state trick as the two swappers above.
+        // Win is the modifier held ACROSS taps (&kt, applied immediately); Ctrl rides
+        // along inside each tap as LC(TAB), so every tap reaches the host as
+        // Ctrl+Win+Tab and Win never lifts between taps.
+        // Do NOT hold both mods via a macro here: macro bindings are queued with
+        // wait-ms (100ms default) between them, while the tri-state's tap fires
+        // immediately -> the first tap went out as a bare Ctrl+Tab and Win only landed
+        // afterwards. &kt has no such queue.
+        // Win is released when the Lower layer is left or any non-ignored key is hit.
         // ignored-key-positions: 37/40 (the Lower-layer Enter thumbs that hold the layer)
         // and 15 (Shift on Lower, so Ctrl+Win+Shift+Tab can cycle the other way).
         ws_swapper: ws_swapper {
             compatible = "zmk,behavior-tri-state";
             #binding-cells = <0>;
-            bindings = <&cw_hold>, <&kp TAB>, <&cw_release>;
+            bindings = <&kt LGUI>, <&kp LC(TAB)>, <&kt LGUI>;
             ignored-key-positions = <15 37 40>;
         };
 
@@ -288,22 +290,6 @@
             tap-ms = <10>;
             bindings = <&macro_press &kp LALT>, <&macro_tap &kp KP_N0 &kp KP_N9 &kp KP_N6>, <&macro_release &kp LALT>;
             label = "GRAVE_CONST";
-        };
-
-        // Halves of the Ctrl+Win hold used by ws_swapper. Deliberately press-only /
-        // release-only: they are not usable as normal keys on their own.
-        cw_hold: cw_hold {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&macro_press &kp LCTRL &kp LGUI>;
-            label = "CW_HOLD";
-        };
-
-        cw_release: cw_release {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&macro_release &kp LCTRL &kp LGUI>;
-            label = "CW_RELEASE";
         };
 
         brackets: brackets {
